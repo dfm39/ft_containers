@@ -94,7 +94,17 @@ namespace ft
 			return this->_ptr == rhs.base();
 		}
 
-		bool operator!=(const rbt_iterator & rhs)
+		bool operator==(const const_rbt_iterator<Tnode, Ttree> & rhs)
+		{
+			return this->_ptr == rhs.base();
+		}
+
+		bool operator!=(const rbt_iterator<Tnode, Ttree> & rhs)
+		{
+			return this->_ptr != rhs.base();
+		}
+
+		bool operator!=(const const_rbt_iterator<Tnode, Ttree> & rhs)
 		{
 			return this->_ptr != rhs.base();
 		}
@@ -249,11 +259,20 @@ namespace ft
 			return this->base() == rhs.base();
 		}
 
+		bool operator==(const rbt_iterator<Tnode, Ttree> & rhs) const
+		{
+			return this->base() == rhs.base();
+		}
+
 		bool operator!=(const const_rbt_iterator & rhs) const
 		{
 			return this->base() != rhs.base();
 		}
 
+		bool operator!=(const rbt_iterator<Tnode, Ttree> & rhs) const
+		{
+			return this->base() != rhs.base();
+		}
 
 		private:
 		node_pointer _ptr;
@@ -306,18 +325,6 @@ namespace ft
 			this->_ptr = helper;
 		}
 	};
-
-		template <typename Tnode, typename Ttree>
-		bool operator!=(rbt_iterator<Tnode, Ttree> & lhs, const_rbt_iterator<Tnode, Ttree> & rhs)
-		{
-			return lhs->base() != rhs.base();
-		}
-
-		template <typename Tnode, typename Ttree>
-		bool operator==(const_rbt_iterator<Tnode, Ttree> & lhs, rbt_iterator<Tnode, Ttree> & rhs)
-		{
-			return lhs->base() == rhs.base();
-		}
 }
 
 #endif
