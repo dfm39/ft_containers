@@ -32,10 +32,9 @@ namespace ft
 		rbt_iterator(const rbt_iterator &	src) : _ptr(src._ptr)
 		{}
 
-
-		// template<typename Utree>
-		// rbt_iterator(const rbt_iterator<Tnode, Utree> &	src) : _ptr(src.base())
-		// {}
+		template<typename Utree>
+		rbt_iterator(const rbt_iterator<Tnode, Utree> &	src) : _ptr(src.base())
+		{}
 
 		/* Destructor */
 		virtual ~rbt_iterator()
@@ -94,7 +93,7 @@ namespace ft
 			return this->_ptr == rhs.base();
 		}
 
-		bool operator==(const const_rbt_iterator<Tnode, Ttree> & rhs)
+		bool operator==(const const_rbt_iterator<Tnode, Ttree> & rhs) const
 		{
 			return this->_ptr == rhs.base();
 		}
@@ -104,7 +103,7 @@ namespace ft
 			return this->_ptr != rhs.base();
 		}
 
-		bool operator!=(const const_rbt_iterator<Tnode, Ttree> & rhs)
+		bool operator!=(const const_rbt_iterator<Tnode, Ttree> & rhs) const
 		{
 			return this->_ptr != rhs.base();
 		}
@@ -259,7 +258,7 @@ namespace ft
 			return this->base() == rhs.base();
 		}
 
-		bool operator==(const rbt_iterator<Tnode, Ttree> & rhs) const
+		bool operator==(const rbt_iterator<Tnode, Ttree> & rhs)
 		{
 			return this->base() == rhs.base();
 		}
@@ -269,7 +268,7 @@ namespace ft
 			return this->base() != rhs.base();
 		}
 
-		bool operator!=(const rbt_iterator<Tnode, Ttree> & rhs) const
+		bool operator!=(const rbt_iterator<Tnode, Ttree> & rhs)
 		{
 			return this->base() != rhs.base();
 		}
