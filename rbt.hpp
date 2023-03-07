@@ -5,6 +5,7 @@
 # include <string>
 # include <iostream>
 # include "utils.hpp"
+
 # define BLACK true
 # define RED false
 

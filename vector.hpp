@@ -40,10 +40,10 @@ namespace ft
 		/*---------------------------*/
 
 		/* Default Constructor */
+		/*Creates an instance of allocator type and sets private values to NULL*/
 		explicit vector (const allocator_type & alloc = allocator_type()) 
 			: _capacity(0) , _begin(NULL) , _end(NULL) , _allocator(alloc)
 		{}
-		/*Creates an instance of allocator type and sets private values to 0/NULL*/
 
 		/* Fill Constructor */
 		explicit vector (size_type n, const value_type & value = value_type(), const allocator_type & alloc = allocator_type()) 
@@ -284,8 +284,11 @@ namespace ft
 		iterator	insert(const_iterator pos, size_type count, const T& value)
 		{
 			size_type distance = pos.base() - this->_begin;
-			vector tmp(count, value);
-			this->insert(pos, tmp.begin(), tmp.end());
+			if (0 < count)
+			{
+				vector tmp(count, value);
+				this->insert(pos, tmp.begin(), tmp.end());
+			} 
 			return this->_begin + distance;
 		}
 
@@ -294,7 +297,7 @@ namespace ft
 		{
 			typedef typename iterator_traits<InputIt>::iterator_category	it_type;
 			size_type	distance = this->_end - pos.base();
-			_insert_type(pos, first, last, it_type());
+			this->_insert_type(pos, first, last, it_type());
 			return this->_begin + distance;
 		}
 
@@ -502,13 +505,16 @@ namespace ft
 			else
 			{
 				helper = this->_begin + (this->size() - distance);
-				for (pointer back = this->_end + r_len - 1; this->_end + r_len - distance - 1 < back; back--)
-				{
-					this->_allocator.destroy(back - r_len);
-					this->_allocator.construct(back, back[-r_len]);
-				}
-				for (size_type i = 0; i < r_len; i++)
-					this->_allocator.construct(helper++, *(first++));
+					// std::cout << "test" << std::endl;
+					for (pointer back = this->_end + r_len - 1; this->_end + r_len - distance - 1 < back; back--)
+					{
+						this->_allocator.construct(back, back[-r_len]);
+						this->_allocator.destroy(back - r_len);
+					}
+					for (size_type i = 0; i < r_len; i++)
+					{
+						this->_allocator.construct(helper++, *(first++));
+					}
 				this->_end += r_len;
 			}
 		}
