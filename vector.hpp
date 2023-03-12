@@ -57,13 +57,7 @@ namespace ft
 					this->_allocator.construct(this->_end++, value);
 			}
 		}
-		
-		pointer	_allocate(size_type const n)
-		{
-			if (this->max_size() < n)
-				throw std::length_error("size_type \'new_capacity\' exceeds maximum capacity");
-			return	this->_allocator.allocate(n);
-		}
+
 		/*Constructs an instance of the value_type (T<?>) and an instance of std::allocator sets capaity to n*/
 			
 		/* Range Constructor */
@@ -78,7 +72,7 @@ namespace ft
 		vector (const vector& src) 
 			: _capacity(src._capacity)
 		{
-			this->_begin = this->_allocator.allocate(this->_capacity);
+			this->_begin = this->_allocate(this->_capacity);
 			this->_end = this->_begin;
 			for (size_type i = 0; i < src.size(); i++)
 				this->_allocator.construct(this->_end++, *(src.data() + i));
@@ -173,11 +167,11 @@ namespace ft
 		}
 
 		/* Data function*/
-		value_type *	data()
+		pointer	data()
 		{
 			return this->_begin;
 		}
-		const value_type *	data() const
+		const pointer	data() const
 		{
 			return this->_begin;
 		}
@@ -187,49 +181,49 @@ namespace ft
 		iterator	begin()
 		{
 			iterator it(this->_begin);
-			return (it);
+			return it;
 		}
 
 		iterator	end()
 		{
 			iterator it(this->_end);
-			return (it);
+			return it;
 		}
 
 		const_iterator	begin() const
 		{
 			const_iterator it(this->_begin);
-			return (it);
+			return it;
 		}
 
 		const_iterator	end() const
 		{
 			const_iterator it(this->_end);
-			return (it);
+			return it;
 		}
 
 		reverse_iterator	rbegin()
 		{
 			reverse_iterator it(this->_end);
-			return (it);
+			return it;
 		}
 
 		reverse_iterator	rend()
 		{
 			reverse_iterator it(this->_begin);
-			return (it);
+			return it;
 		}
 
 		const_reverse_iterator	rbegin() const
 		{
 			const_reverse_iterator it(this->_end);
-			return (it);
+			return it;
 		}
 
 		const_reverse_iterator	rend() const
 		{
 			const_reverse_iterator it(this->_begin);
-			return (it);
+			return it;
 		}
 		/*________________*/
 		/*--- CAPACITY ---*/
@@ -276,9 +270,9 @@ namespace ft
 
 		iterator	insert(const_iterator pos, const T& value)
 		{
-			size_type distance = pos.base() - this->_begin;
-			this->insert(pos, 1, value);
-			return this->_begin + distance;
+				size_type distance = pos.base() - this->_begin;
+				this->insert(pos, 1, value);
+				return this->_begin + distance;
 		}
 
 		iterator	insert(const_iterator pos, size_type count, const T& value)
@@ -323,7 +317,9 @@ namespace ft
 		iterator	erase(iterator first, iterator last)
 		{
 			if (first == last) 
-				return first;
+			{
+				return last;
+			}
 			size_type position = first.base() - this->_begin;
 			size_type r_len = last - first;
 			size_type new_size = this->size() - r_len;
@@ -346,14 +342,15 @@ namespace ft
 
 		void	push_back(value_type const & value)
 		{
+			value_type val = value;
 			if (this->size() < this->_capacity)
 			{
-				this->_allocator.construct(this->_end++, value);
+				this->_allocator.construct(this->_end++, val);
 			}
 			else
 			{
 				this->_reallocate(this->_capacity == 0 ? 1 : this->_capacity * 2);
-				this->_allocator.construct(this->_end++, value);
+				this->_allocator.construct(this->_end++, val);
 			}
 		}
 
@@ -412,14 +409,21 @@ namespace ft
 		pointer			_begin;
 		pointer			_end;
 		allocator_type	_allocator;
+		
+		pointer	_allocate(size_type const n)
+		{
+			if (this->max_size() < n)
+				throw std::length_error("size_type \'new_capacity\' exceeds maximum capacity");
+			return	this->_allocator.allocate(n);
+		}
 
 		void	_reallocate(size_type new_n)
 		{
-			pointer realloc = this->_allocator.allocate(new_n);
+			pointer realloc = this->_allocate(new_n);
 			size_type	size = this->size();
 			for (size_type i = 0; i < size; i++)
 			{
-				this->_allocator.construct(realloc + i, this->_begin[i]);
+				this->_allocator.construct(realloc + i, *(this->_begin + i));
 				this->_allocator.destroy(_begin + i);
 			}
 			if (this->_begin != NULL)
@@ -461,6 +465,15 @@ namespace ft
 		}
 
 		template <class InputIt>
+		void	_insert_type(const_iterator pos, InputIt first, InputIt last, std::input_iterator_tag)
+		{
+			vector tmp;
+			for (; first != last; first++)
+				tmp.push_back(*first);
+			this->insert(pos, tmp.begin(), tmp.end());
+		}
+
+		template <class InputIt>
 		void	_insert_type(const_iterator pos, InputIt first, InputIt last, std::forward_iterator_tag)
 		{
 			size_type	r_len = 0;
@@ -474,11 +487,11 @@ namespace ft
 				r_len++;
 			if (this->_capacity < this->size() + r_len)
 			{
-				if (this->_capacity * 2 <this->size() + r_len)
+				if (this->_capacity * 2 < this->size() + r_len)
 					new_capacity = this->size() + r_len;
 				else
 					new_capacity = this->_capacity * 2;
-				new_begin = this->_allocator.allocate(new_capacity);
+				new_begin = this->_allocate(new_capacity);
 				new_end = new_begin;
 				helper = this->_begin;
 				try
@@ -505,27 +518,17 @@ namespace ft
 			else
 			{
 				helper = this->_begin + (this->size() - distance);
-					// std::cout << "test" << std::endl;
-					for (pointer back = this->_end + r_len - 1; this->_end + r_len - distance - 1 < back; back--)
-					{
-						this->_allocator.construct(back, back[-r_len]);
-						this->_allocator.destroy(back - r_len);
-					}
-					for (size_type i = 0; i < r_len; i++)
-					{
-						this->_allocator.construct(helper++, *(first++));
-					}
+				for (pointer back = this->_end + r_len - 1; this->_end + r_len - distance - 1 < back; back--)
+				{
+					this->_allocator.construct(back, back[-r_len]);
+					this->_allocator.destroy(back - r_len);
+				}
+				for (size_type i = 0; i < r_len; i++)
+				{
+					this->_allocator.construct(helper++, *(first++));
+				}
 				this->_end += r_len;
 			}
-		}
-
-		template <class InputIt>
-		void	_insert_type(const_iterator pos, InputIt first, InputIt last, std::input_iterator_tag)
-		{
-			vector tmp;
-			for (; first != last; first++)
-				tmp.push_back(*first);
-			this->insert(pos, tmp.begin(), tmp.end());
 		}
 	};
 
