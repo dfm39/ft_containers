@@ -1,0 +1,8 @@
+----- STD CONSTRUCTOR -------
+STD - TIME: 0 ms
+----- STD ASSIGNMENT -------
+STD - TIME: 8 ms
+----- STD EMPTY, SIZE, TOP, PUSH, POP -------
+STD - TIME: 44 ms
+----- STD RELATIONAL OPERATORS -------
+STD - TIME: 0 ms

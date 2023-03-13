@@ -37,13 +37,6 @@ namespace ft
 		typedef typename	ft::reverse_iterator<iterator>										reverse_iterator;
 		typedef typename	ft::reverse_iterator<const_iterator>								const_reverse_iterator;
 
-		// no matching conversion for functional-style cast from 
-		// 'ft::pair<ft::node<ft::pair<const int, int> > *, bool>::first_type' 
-		// (aka 'ft::node<ft::pair<const int, int> > *') 
-		// to 
-		// 'ft::map<int, int>::iterator' 
-		// (aka 'rbt_iterator<pair<const int, int> >')
-
 		/*____________________*/
 		/*--- MEMBER CLASS ---*/
 		/*--------------------*/
@@ -74,9 +67,6 @@ namespace ft
 		/*_______________________*/
 		/*---MEMBER FUNCITONS ---*/
 		/*-----------------------*/
-
-		// map() : _tree(key_compare(), allocator_type())
-		// {}
 
 		explicit map(const key_compare & comp = key_compare(), const allocator_type & alloc = allocator_type())
 			: _tree(comp, alloc), _comp(comp)
@@ -133,12 +123,6 @@ namespace ft
 			if (it == this->end())
 					it = insert(value_type(key, mapped_type())).first;
 			return it->second;
-		}
-
-
-		void	_print_tree()
-		{
-			this->_tree.print_head_contents();
 		}
 
 		/*_________________*/
@@ -218,7 +202,7 @@ namespace ft
 			return ft::pair<iterator, bool>(iterator(helper.first), helper.second);
 		}
 
-		iterator insert(iterator	pos, const value_type &	val)
+		iterator insert(iterator pos, const value_type &	val)
 		{
 			(void) pos;
 			return iterator(this->_tree.insert_node(val).first);
@@ -274,8 +258,7 @@ namespace ft
 			return const_iterator(this->_tree.find_node(value_type(key, mapped_type())));
 		}
 
-		ft::pair<iterator,
-		iterator> equal_range(const Key& key)
+		ft::pair<iterator,iterator> equal_range(const Key& key)
 		{
 			return ft::pair<iterator, iterator>(lower_bound(key), upper_bound(key));
 		}

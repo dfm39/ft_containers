@@ -1,2 +1,32 @@
--------FT RESIZE-------
+------ FT CONSTRUCTOR -------
+FT - TIME: 60 ms
+------ FT ASSIGNMENT -------
+FT - TIME: 12 ms
+------ FT ASSIGN -------
+FT - TIME: 4 ms
+------ FT AT, [] OVERLOAD, DATA, BACK & FRONT -------
 FT - TIME: 0 ms
+------ FT ITERATORS -------
+FT - TIME: 0 ms
+------ FT SIZE, EMPTY, MAX_SIZE, CAPACITY, RESERVE -------
+FT - TIME: 0 ms
+------ FT CLEAR -------
+FT - TIME: 6 ms
+------ FT INSERT SINGLE ELEMENT -------
+FT - TIME: 1 ms
+------ FT INSERT FILL -------
+FT - TIME: 87 ms
+------ FT INSERT RANGE -------
+FT - TIME: 9 ms
+------ FT ERASE SINGLE ELEMENT -------
+FT - TIME: 30 ms
+------ FT ERASE RANGE -------
+FT - TIME: 4 ms
+------ FT POP BACK -------
+FT - TIME: 0 ms
+------ FT RESIZE -------
+FT - TIME: 0 ms
+------ FT SWAP -------
+FT - TIME: 0 ms
+------ FT RELATIONAL OPERATORS -------
+FT - TIME: 3 ms

@@ -15,6 +15,8 @@
 	#define NAMESPACE ft
 #endif
 
+#define std_vec typename std::vector<T>
+
 void	write_time(std::fstream &tstream, const time_t duration)
 {
 	if (STL)
@@ -24,12 +26,28 @@ void	write_time(std::fstream &tstream, const time_t duration)
 	tstream << "TIME: " << duration << " ms" <<"\n";
 }
 
+template <typename T>
+void	write_std_vec(std_vec vec, std::fstream &ostream)
+{
+	ostream << "return vec:" "\n\n";
+	ostream << "SIZE = " << vec.size() << "\n";
+
+	ostream << "CONTENT =";
+	for (std_vec::iterator it = vec.begin(); it != vec.end(); it++)
+	{
+		ostream << " " << *it;
+	}
+	ostream << "\n\n";
+}
+
 void	write_fname(std::string name,std::fstream &tstream, std::fstream &ostream)
 {
 	if (STL)
-		tstream << std::setw(10) << std::setfill('-') << "STD " << name << std::setw(8) << std::setfill('-') << '\n';
+		tstream << std::setw(10) << std::setfill('-') << " STD " <<	\
+			name << " " << std::setw(8) << std::setfill('-') << '\n';
 	else
-		tstream << std::setw(10) << std::setfill('-') << "FT " << name << std::setw(8) << std::setfill('-') << '\n';
+		tstream << std::setw(10) << std::setfill('-') << " FT " <<	\
+			name << " " << std::setw(8) << std::setfill('-') << '\n';
 	ostream << "<< " << name << " >>" << '\n';
 }
 
