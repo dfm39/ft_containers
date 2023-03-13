@@ -27,7 +27,7 @@ namespace ft
 		{}
 
 		/* Copy Constructor*/
-		ra_iterator(ra_iterator const &src) : _ptr(src.base())
+		ra_iterator(const ra_iterator &src) : _ptr(src.base())
 		{}
 		
 		/* Destructor */
@@ -41,7 +41,7 @@ namespace ft
 		}
 
 		/* Copy Assignment Overload*/
-		ra_iterator &	operator=(ra_iterator const & rhs)
+		ra_iterator &	operator=(const ra_iterator & rhs)
 		{
 			this->_ptr = rhs.base();
 			return *this;
@@ -90,22 +90,22 @@ namespace ft
 		}
 
 		/* Arithmetic operators */
-		ra_iterator	operator+(difference_type const & n) const
+		ra_iterator	operator+(const difference_type & n) const
 		{
 			return this->_ptr + n;
 		}
-		ra_iterator	operator-(difference_type const & n) const
+		ra_iterator	operator-(const difference_type & n) const
 		{
 			return this->_ptr - n;
 		}
 
 		/* Addition & Subtraction assignment operators */
-		ra_iterator &	operator+=(difference_type const & n)
+		ra_iterator &	operator+=(const difference_type & n)
 		{
 			this->_ptr += n;
 			return *this;
 		}
-		ra_iterator &	operator-=(difference_type const & n)
+		ra_iterator &	operator-=(const difference_type & n)
 		{
 			this->_ptr -= n;
 			return *this;
@@ -198,10 +198,10 @@ namespace ft
 		{}
 
 		/* Copy Constructors*/
-		const_ra_iterator(const_ra_iterator const &src) : _ptr(src.base())
+		const_ra_iterator(const const_ra_iterator &src) : _ptr(src.base())
 		{}
 		template <typename U>
-		const_ra_iterator(ra_iterator<U> const &src) : _ptr(src.base())
+		const_ra_iterator(const ra_iterator<U> &src) : _ptr(src.base())
 		{}
 
 		/* Destructor */
@@ -214,7 +214,7 @@ namespace ft
 			return this->_ptr;
 		}
 
-		const_ra_iterator &	operator=(const_ra_iterator const & rhs)
+		const_ra_iterator &	operator=(const const_ra_iterator & rhs)
 		{
 			this->_ptr = rhs.base();
 			return *this;
@@ -263,22 +263,22 @@ namespace ft
 		}
 
 		/* Arithmetic operators */
-		const_ra_iterator	operator+(difference_type const & n) const
+		const_ra_iterator	operator+(const difference_type & n) const
 		{
 			return this->_ptr + n;
 		}
-		const_ra_iterator	operator-(difference_type const & n) const
+		const_ra_iterator	operator-(const difference_type & n) const
 		{
 			return this->_ptr - n;
 		}
 
 		/* Addition & Subtraction assignment operators */
-		const_ra_iterator &	operator+=(difference_type const & n)
+		const_ra_iterator &	operator+=(const difference_type & n)
 		{
 			this->_ptr += n;
 			return *this;
 		}
-		const_ra_iterator &	operator-=(difference_type const & n)
+		const_ra_iterator &	operator-=(const difference_type & n)
 		{
 			this->_ptr -= n;
 			return *this;
@@ -354,32 +354,32 @@ namespace ft
 
 	/* Difference_type on lhs addition overload */
 	template <typename U>
-	ra_iterator<U>	operator+(typename ra_iterator<U>::difference_type const & n, ra_iterator<U> & rhs)
+	ra_iterator<U>	operator+(const typename ra_iterator<U>::difference_type & n, ra_iterator<U> & rhs)
 	{
 		return rhs.base() + n;
 	}
 	template <typename U>
-	const_ra_iterator<U>	operator+(typename const_ra_iterator<U>::difference_type const & n, const_ra_iterator<U> & rhs)
+	const_ra_iterator<U>	operator+(const typename const_ra_iterator<U>::difference_type & n, const_ra_iterator<U> & rhs)
 	{
 		return rhs.base() + n;
 	}
 	template <typename U>
-	typename ra_iterator<U>::difference_type	operator-(ra_iterator<U> const & lhs, ra_iterator<U> const & rhs)
+	typename ra_iterator<U>::difference_type	operator-(const ra_iterator<U> & lhs, const ra_iterator<U> & rhs)
 	{
 		return lhs.base() - rhs.base();
 	}
 	template <typename U>
-	typename ra_iterator<U>::difference_type	operator-(const_ra_iterator<U> const & lhs, const_ra_iterator<U> const & rhs)
+	typename ra_iterator<U>::difference_type	operator-(const const_ra_iterator<U> & lhs, const const_ra_iterator<U> & rhs)
 	{
 		return lhs.base() - rhs.base();
 	}
 	template <typename U>
-	typename ra_iterator<U>::difference_type	operator-(ra_iterator<U> const & lhs, const_ra_iterator<U> const & rhs)
+	typename ra_iterator<U>::difference_type	operator-(const ra_iterator<U> & lhs, const const_ra_iterator<U> & rhs)
 	{
 		return lhs.base() - rhs.base();
 	}
 	template <typename U>
-	typename ra_iterator<U>::difference_type	operator-(const_ra_iterator<U> const & lhs, ra_iterator<U> const & rhs)
+	typename ra_iterator<U>::difference_type	operator-(const const_ra_iterator<U> & lhs, const ra_iterator<U> & rhs)
 	{
 		return lhs.base() - rhs.base();
 	}

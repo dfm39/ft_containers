@@ -165,7 +165,7 @@ namespace ft
 			this->_tree.erase(*pos);
 		}
 
-		size_type erase (value_type const &	value)
+		size_type erase (const value_type &	value)
 		{
 			return this->_tree.erase(value);
 		}
@@ -185,7 +185,7 @@ namespace ft
 		/*--- LOOKUP ---*/
 		/*--------------*/
 
-		size_type count(const Key& key) const
+		size_type count(const Key &	key) const
 		{
 			if (this->find(key) == this->end())
 				return 0;
@@ -193,45 +193,45 @@ namespace ft
 				return 1;
 		}
 
-		iterator find(const value_type & value)
+		iterator find(const value_type &	value)
 		{
 			return iterator(this->_tree.find_node(value));
 		}
 
-		const_iterator find(const value_type & value) const
+		const_iterator find(const value_type &	value) const
 		{
 			return const_iterator(this->_tree.find_node(value));
 		}
 
-		ft::pair<iterator, iterator> equal_range(const value_type & value)
+		ft::pair<iterator, iterator> equal_range(const value_type &	value)
 		{
 			return ft::pair<iterator, iterator>(lower_bound(value), upper_bound(value));
 		}
 
-		ft::pair<const_iterator, const_iterator> equal_range(const value_type & value) const
+		ft::pair<const_iterator, const_iterator> equal_range(const value_type &	value) const
 		{
 			return ft::pair<const_iterator, const_iterator>(lower_bound(value), upper_bound(value));
 		}
 
-		iterator lower_bound(const value_type & value)
+		iterator lower_bound(const value_type &	value)
 		{
 			iterator it(this->_tree.lower_bound(value));
 			return (it);
 		}
 
-		const_iterator lower_bound(const value_type & value) const
+		const_iterator lower_bound(const value_type &	value) const
 		{
 			const_iterator it(this->_tree.lower_bound(value));
 			return (it);
 		}
 
-		iterator upper_bound(const value_type & value)
+		iterator upper_bound(const value_type &	value)
 		{
 			iterator it(this->_tree.upper_bound(value));
 			return (it);
 		}
 
-		const_iterator upper_bound(const value_type & value) const
+		const_iterator upper_bound(const value_type &	value) const
 		{
 			const_iterator it(this->_tree.upper_bound(value));
 			return (it);
@@ -257,36 +257,36 @@ namespace ft
 	};
 
 	template <class Key, class Compare, class Allocator>
-	bool	operator==(ft::set<Key, Compare, Allocator> const & lhs, ft::set<Key, Compare, Allocator> const & rhs)
+	bool	operator==(const ft::set<Key, Compare, Allocator> & lhs, const ft::set<Key, Compare, Allocator> & rhs)
 	{
 		if (lhs.size() == rhs.size())
 			return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
 		return false;
 	}
 	template <class Key, class Compare, class Allocator>
-	bool	operator!=(ft::set<Key, Compare, Allocator> const & lhs, ft::set<Key, Compare, Allocator> const & rhs)
+	bool	operator!=(const ft::set<Key, Compare, Allocator> & lhs, const ft::set<Key, Compare, Allocator> & rhs)
 	{
 		if (lhs.size() != rhs.size())
 			return true;
 		return !ft::equal(lhs.begin(), lhs.end(), rhs.begin());
 	}
 	template <class Key, class Compare, class Allocator>
-	bool	operator<(ft::set<Key, Compare, Allocator> const & lhs, ft::set<Key, Compare, Allocator> const & rhs)
+	bool	operator<(const ft::set<Key, Compare, Allocator> & lhs, const ft::set<Key, Compare, Allocator> & rhs)
 	{
 		return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 	}
 	template <class Key, class Compare, class Allocator>
-	bool	operator>(ft::set<Key, Compare, Allocator> const & lhs, ft::set<Key, Compare, Allocator> const & rhs)
+	bool	operator>(const ft::set<Key, Compare, Allocator> & lhs, const ft::set<Key, Compare, Allocator> & rhs)
 	{
 		return ft::lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end());
 	}
 	template <class Key, class Compare, class Allocator>
-	bool	operator<=(ft::set<Key, Compare, Allocator> const & lhs, ft::set<Key, Compare, Allocator> const & rhs)
+	bool	operator<=(const ft::set<Key, Compare, Allocator> & lhs, const ft::set<Key, Compare, Allocator> & rhs)
 	{
 		return !ft::lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end());
 	}
 		template <class Key, class Compare, class Allocator>
-	bool	operator>=(ft::set<Key, Compare, Allocator> const & lhs, ft::set<Key, Compare, Allocator> const & rhs)
+	bool	operator>=(const ft::set<Key, Compare, Allocator> & lhs, const ft::set<Key, Compare, Allocator> & rhs)
 	{
 		return !ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 	}

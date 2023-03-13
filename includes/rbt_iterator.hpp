@@ -204,13 +204,13 @@ namespace ft
 		}
 
 		/* Copy Assignment Overload*/
-		const_rbt_iterator &	operator=(const_rbt_iterator const & rhs)
+		const_rbt_iterator &	operator=(const const_rbt_iterator & rhs)
 		{
 			this->_ptr = rhs.base();
 			return *this;
 		}
 		
-		const_rbt_iterator &	operator=(rbt_iterator<Tnode, Ttree> const & rhs)
+		const_rbt_iterator &	operator=(const rbt_iterator<Tnode, Ttree> & rhs)
 		{
 			this->_ptr = rhs.base();
 			return *this;

@@ -137,7 +137,7 @@ namespace ft
 			this->_size = 0;
 		}
 
-		ft::pair<node_pointer, bool>	insert_node(value_type const & value)
+		ft::pair<node_pointer, bool>	insert_node(const value_type & value)
 		{
 			/* Insert First node as Root */
 			bool	unique = true;
@@ -173,7 +173,7 @@ namespace ft
 			return ft::pair<node_pointer, bool>(new_node, unique);
 		}
 
-		bool	erase(value_type const & value)
+		bool	erase(const value_type & value)
 		{
 			node_pointer	del_node = find_node(value);
 			if (del_node->null_node)
@@ -228,7 +228,7 @@ namespace ft
 			return helper;
 		}
 
-		node_pointer	lower_bound(value_type const & value) const
+		node_pointer	lower_bound(const value_type & value) const
 		{
 			node_pointer helper = this->_root;
 			node_pointer ret = this->_nil;
@@ -246,7 +246,7 @@ namespace ft
 			return ret;
 		}
 
-		node_pointer	upper_bound(value_type const & value) const
+		node_pointer	upper_bound(const value_type & value) const
 		{
 			node_pointer helper = this->_root;
 			node_pointer ret = this->_nil;
@@ -320,14 +320,14 @@ namespace ft
 			return false;
 		}
 
-		bool	_is_leafnode(node_pointer const &	node)
+		bool	_is_leafnode(const node_pointer &	node)
 		{
 			if (node->left == this->_nil && node->right == this->_nil)
 				return true;
 			return false;
 		}
 
-		bool	_has_one_child(node_pointer const &	node)
+		bool	_has_one_child(const node_pointer &	node)
 		{
 			return (!node->left->null_node && node->right->null_node) || \
 					(!node->right->null_node && node->left->null_node);
@@ -353,7 +353,7 @@ namespace ft
 		}
 
 		/* If node already exists, parent is returned to pass the exisitng entry */
-		node_pointer	_set_child(node_pointer const & parent, node_pointer const & new_node)
+		node_pointer	_set_child(const node_pointer & parent, node_pointer const & new_node)
 		{
 			if (this->_is_smaller(new_node->content, parent->content))
 				parent->left = new_node;
@@ -368,7 +368,7 @@ namespace ft
 			return new_node;
 		}
 
-		node_pointer	_get_sibling(node_pointer const & node)
+		node_pointer	_get_sibling(const node_pointer & node)
 		{
 			if (node->parent && node == node->parent->left)
 				return node->parent->right;
@@ -378,7 +378,7 @@ namespace ft
 				return NULL;
 		}
 
-		node_pointer	_get_single_child(node_pointer const &	node) const
+		node_pointer	_get_single_child(const node_pointer &	node) const
 		{
 			if (!node->left->null_node)
 				return node->left;
@@ -411,17 +411,17 @@ namespace ft
 		/*--- COMPARISON ---*/
 		/*------------------*/
 
-		bool	_is_smaller(value_type const & value1, value_type const & value2) const
+		bool	_is_smaller(const value_type & value1, const value_type & value2) const
 		{
 			return this->_compare(value1, value2);
 		}
 
-		bool	_is_greater(value_type const & value1, value_type const & value2) const
+		bool	_is_greater(const value_type & value1, const value_type & value2) const
 		{
 			return this->_compare(value2, value1);
 		}
 
-		bool	_is_equal(value_type const & value1, value_type const & value2)
+		bool	_is_equal(const value_type & value1, const value_type & value2)
 		{
 			return !this->_compare(value1, value2) && !this->_compare(value2, value1);
 		}
@@ -437,7 +437,7 @@ namespace ft
 			return new_node;
 		}
 
-		node_pointer	_create_node(value_type const & value)
+		node_pointer	_create_node(const value_type & value)
 		{
 			node_pointer	new_node = this->_alloc.allocate(1);
 			this->_alloc.construct(new_node, node_type(value));
@@ -592,7 +592,7 @@ namespace ft
 		/* cleared without restructuring the tree 							*/
 		/* If the rootnode is black, it will be deleted and the doubleblack	*/
 		/* needs to be dissolved											*/
-		void	_delete_leafnode(node_pointer const &	node)
+		void	_delete_leafnode(const node_pointer &	node)
 		{
 			/* CASE 1.1 - Leafnode is red 		*/
 			if (node->colour == RED)
@@ -621,7 +621,7 @@ namespace ft
 		}
 
 		/* Restructures the tree after deletion of black leafnode	*/
-		void	_dissolve_doubleblack(node_pointer const &	parent, node_pointer const &	sibling)
+		void	_dissolve_doubleblack(const node_pointer &	parent, const node_pointer &	sibling)
 		{
 			// if (parent == this->_root)
 			// 	return ;
@@ -740,7 +740,7 @@ namespace ft
 		/*--- NODE MANIPULATION ---*/
 		/*-------------------------*/
 
-		void	_recolour(node_pointer const & node)
+		void	_recolour(const node_pointer & node)
 		{
 			if (!node->null_node)
 				node->colour = !node->colour;
@@ -815,7 +815,7 @@ namespace ft
 			return node;
 		}
 
-		const node_pointer	_minimum(node_pointer	const node) const
+		const node_pointer	_minimum(const node_pointer	node) const
 		{
 			while (!node->null_node && !node->left->null_node)
 				node = node->left;
@@ -830,7 +830,7 @@ namespace ft
 			return node;
 		}
 
-		const node_pointer	_maximum(node_pointer	const node) const
+		const node_pointer	_maximum(const node_pointer	node) const
 		{
 			while (!node->null_node && !node->right->null_node)
 				node = node->right;
@@ -844,7 +844,7 @@ namespace ft
 			this->_min = this->_minimum(this->_root);
 		}
 
-		void	_set_max(node_pointer const & node)
+		void	_set_max(const node_pointer & node)
 		{
 			this->_max = node;
 			this->_nil->parent = this->_max;
@@ -886,93 +886,6 @@ namespace ft
 			this->_alloc.destroy(node);
 			this->_alloc.deallocate(node, 1);
 		}
-
-
-		/*______________________*/
-		/*--- DEBUG PRINTING ---*/
-		/*----------------------*/
-
-		// # define COLOR_DEFAULT "\033[0m"
-		// # define COLOR_RED "\033[31;1m"
-
-		// void	_print_p() const
-		// {
-		// 	this->print_pair(this->_root, 0);
-		// }
-
-		// void	_print_i() const
-		// {
-		// 	this->print_int(this->_root, 0);
-		// }
-
-		// void _print_int(node_pointer node, size_type depth) const
-		// {
-		// 	for (size_t i = 0; i < depth; ++i)
-		// 		std::cout << "    ";
-
-		// 	if (!node->null_node)
-		// 	{
-		// 		if (this->_is_right_child(node))
-		// 			std::cout << "⇗";
-		// 		else
-		// 			std::cout << "⇘";
-		// 		if (!node->colour)
-		// 			std::cout << COLOR_RED;
-		// 		std::cout << "[" << node->content << "]\n" << COLOR_DEFAULT;
-		// 	}
-
-		// 	if (!node->null_node && !node->right->null_node)
-		// 		this->print_int(node->right, depth +1);
-		// 	else
-		// 	{
-		// 		for (size_t i = 0; i < depth + 1; ++i)
-		// 			std::cout << "    ";
-		// 		std::cout << "⇗[NULL]\n";
-		// 	}
-
-		// 	if (!node->null_node && !node->left->null_node)
-		// 		this->print_int(node->left, depth +1);
-		// 	else
-		// 	{
-		// 		for (size_t i = 0; i < depth + 1; ++i)
-		// 			std::cout << "    ";
-		// 		std::cout << "⇘[NULL]\n";
-		// 	}
-		// }
-		// void _print_pair(node_pointer node, size_type depth) const
-		// {
-		// 	for (size_t i = 0; i < depth; ++i)
-		// 		std::cout << "    ";
-
-		// 	if (!node->null_node)
-		// 	{
-		// 		if (this->_is_right_child(node))
-		// 			std::cout << "⇗";
-		// 		else
-		// 			std::cout << "⇘";
-		// 		if (!node->colour)
-		// 			std::cout << COLOR_RED;
-		// 		std::cout << "[" << node->content.first << "]\n" << COLOR_DEFAULT;
-		// 	}
-
-		// 	if (!node->null_node && !node->right->null_node)
-		// 		this->print_pair(node->right, depth +1);
-		// 	else
-		// 	{
-		// 		for (size_t i = 0; i < depth + 1; ++i)
-		// 			std::cout << "    ";
-		// 		std::cout << "⇗[NULL]\n";
-		// 	}
-
-		// 	if (!node->null_node && !node->left->null_node)
-		// 		this->print_pair(node->left, depth +1);
-		// 	else
-		// 	{
-		// 		for (size_t i = 0; i < depth + 1; ++i)
-		// 			std::cout << "    ";
-		// 		std::cout << "⇘[NULL]\n";
-		// 	}
-		// }
 	};
 }
 

@@ -78,7 +78,7 @@ namespace ft
 
 		/*Constructs reverse_iterator from a different type rev_iterator */
 		template <typename It>
-		reverse_iterator(reverse_iterator<It> const & src) : _iterator(src.base())
+		reverse_iterator(const reverse_iterator<It> & src) : _iterator(src.base())
 		{}
 
 		/* Destructor */
@@ -92,7 +92,7 @@ namespace ft
 		}
 
 		/* Copy Assignment Overload*/
-		reverse_iterator &	operator=(reverse_iterator const & rhs)
+		reverse_iterator &	operator=(const reverse_iterator & rhs)
 		{
 			this->_iterator = rhs.base();
 			return *this;
@@ -177,22 +177,22 @@ namespace ft
 		}
 
 		/* Arithmetic operators */
-		reverse_iterator	operator+(difference_type const & n) const
+		reverse_iterator	operator+(const difference_type & n) const
 		{
 			return reverse_iterator(this->_iterator.operator-(n));
 		}
-		reverse_iterator	operator-(difference_type const & n) const
+		reverse_iterator	operator-(const difference_type & n) const
 		{
 			return reverse_iterator(this->_iterator.operator+(n));
 		}
 
 		/* Addition & Subtraction assignment operators */
-		reverse_iterator &	operator+=(difference_type const & n)
+		reverse_iterator &	operator+=(const difference_type & n)
 		{
 			this->_iterator -= n;
 			return *this;
 		}
-		reverse_iterator &	operator-=(difference_type const & n)
+		reverse_iterator &	operator-=(const difference_type & n)
 		{
 			this->_iterator += n;
 			return *this;
@@ -203,12 +203,12 @@ namespace ft
 	};
 
 	template <typename It>
-	reverse_iterator<It>	operator+(typename reverse_iterator<It>::difference_type const & n, reverse_iterator<It> & rhs)
+	reverse_iterator<It>	operator+(const typename reverse_iterator<It>::difference_type & n, reverse_iterator<It> & rhs)
 	{
 		return reverse_iterator<It>(rhs.base().operator-(n));
 	}
 	template <typename It_l, typename It_r>
-	typename reverse_iterator<It_l>::difference_type	operator-(reverse_iterator<It_l> const & lhs, reverse_iterator<It_r> const & rhs)
+	typename reverse_iterator<It_l>::difference_type	operator-(const reverse_iterator<It_l> & lhs, const reverse_iterator<It_r> & rhs)
 	{
 		return rhs.base().base() - lhs.base().base();
 	}

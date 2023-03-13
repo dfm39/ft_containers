@@ -174,7 +174,7 @@ clean:
 fclean:	clean
 	@rm -f $(FT)*
 	@rm -f $(STD)*
-	@rm -rf results/
+	@rm -rf $(RESULTS_DIR)
 	@echo $(RED)"  -> TESTS & RESULTS DELETED" $(EOC)
 
 re:			fclean all
