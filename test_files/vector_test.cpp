@@ -10,7 +10,7 @@
 	#define NAMESPACE std
 	#define prefix "std_"
 #else
-	#include "../vector.hpp"
+	#include "vector.hpp"
 	#define NAMESPACE ft
 	#define prefix "ft_"
 #endif

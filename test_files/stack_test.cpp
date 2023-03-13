@@ -14,7 +14,7 @@
 	#define prefix "std_"
 #else
 
-	#include "../stack.hpp"
+	#include "stack.hpp"
 	#define NAMESPACE ft
 	#define prefix "ft_"
 #endif

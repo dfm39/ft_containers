@@ -309,11 +309,6 @@ namespace ft
 		private:
 		tree_type	_tree;
 		key_compare _comp;
-
-		// void	_print()
-		// {
-		// 	this->_tree.print_p();
-		// }
 	};
 	
 
@@ -355,22 +350,22 @@ namespace ft
 	/*	FT::SWAP FUNCTION: UNCOMMENT FOR TERMINATOR TEST & CRASH_TEST, UNCOMMENTING	*/
 	/*	THIS WILL CAUSE AMBIGUITY IN CONTAINERS TEST & CRASH_TEST. IF YOU			*/
 	/*	UNCOMMENT THIS, COMMENT THE SWAP IMPLEMENTATION BELOW TO BYPASS AMBIGUITY	*/
+	// template <class Key, class T, class Compare, class Allocator>
+	// void swap(ft::map<Key, T, Compare, Allocator> & a, ft::map<Key, T, Compare, Allocator> & b)
+	// {
+	// 	a.swap(b);
+	// }
+}
+
+/* VECTOR SWAP IMPLEMENTATION IN STD::SWAP 								*/
+/* (PUT AS COMMAND TO RUN CONTAINERS TEST AND CONTAINERS CRASH TEST)	*/
+namespace std
+{
 	template <class Key, class T, class Compare, class Allocator>
 	void swap(ft::map<Key, T, Compare, Allocator> & a, ft::map<Key, T, Compare, Allocator> & b)
 	{
 		a.swap(b);
 	}
 }
-
-/* VECTOR SWAP IMPLEMENTATION IN STD::SWAP 								*/
-/* (PUT AS COMMAND TO RUN CONTAINERS TEST AND CONTAINERS CRASH TEST)	*/
-// namespace std
-// {
-// 	template <class Key, class T, class Compare, class Allocator>
-// 	void swap(ft::map<Key, T, Compare, Allocator> & a, ft::map<Key, T, Compare, Allocator> & b)
-// 	{
-// 		a.swap(b);
-// 	}
-// }
 
 #endif

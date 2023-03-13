@@ -1,8 +1,0 @@
------- FT CONSTRUCTOR -------
-FT - TIME: 0 ms
------- FT ASSIGNMENT -------
-FT - TIME: 8 ms
------- FT EMPTY, SIZE, TOP, PUSH, POP -------
-FT - TIME: 40 ms
------- FT RELATIONAL OPERATORS -------
-FT - TIME: 0 ms

@@ -11,7 +11,7 @@
 	#define NAMESPACE std
 	#define prefix "std_"
 #else
-	#include "../map.hpp"
+	#include "map.hpp"
 	#define NAMESPACE ft
 	#define prefix "ft_"
 #endif

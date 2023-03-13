@@ -294,22 +294,22 @@ namespace ft
 	/*	FT::SWAP FUNCTION: UNCOMMENT FOR TERMINATOR TEST & CRASH_TEST, UNCOMMENTING	*/
 	/*	THIS WILL CAUSE AMBIGUITY IN CONTAINERS TEST & CRASH_TEST. IF YOU			*/
 	/*	UNCOMMENT THIS, COMMENT THE SWAP IMPLEMENTATION BELOW TO BYPASS AMBIGUITY	*/
+	// template <class Key, class Compare, class Allocator>
+	// void swap(ft::set<Key, Compare, Allocator> & a, ft::set<Key, Compare, Allocator> & b)
+	// {
+	// 	a.swap(b);
+	// }
+}
+
+/* VECTOR SWAP IMPLEMENTATION IN STD::SWAP 								*/
+/* (PUT AS COMMAND TO RUN CONTAINERS TEST AND CONTAINERS CRASH TEST)	*/
+namespace std
+{
 	template <class Key, class Compare, class Allocator>
 	void swap(ft::set<Key, Compare, Allocator> & a, ft::set<Key, Compare, Allocator> & b)
 	{
 		a.swap(b);
 	}
 }
-
-/* VECTOR SWAP IMPLEMENTATION IN STD::SWAP 								*/
-/* (PUT AS COMMAND TO RUN CONTAINERS TEST AND CONTAINERS CRASH TEST)	*/
-// namespace std
-// {
-// 	template <class Key, class Compare, class Allocator>
-// 	void swap(ft::set<Key, Compare, Allocator> & a, ft::set<Key, Compare, Allocator> & b)
-// 	{
-// 		a.swap(b);
-// 	}
-// }
 
 #endif
