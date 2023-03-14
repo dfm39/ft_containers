@@ -302,10 +302,6 @@ namespace ft
 				return pos;
 			size_type position = pos.base() - this->_begin;
 			size_type new_size = this->size() - 1;
-			size_type diff = new_size - position;
-			if (ft::is_integral<value_type>::value)
-				std::memmove(pos.base(), pos.base() + 1, diff * sizeof(value_type));
-			else
 			{
 				for (size_type i = position; i < new_size; ++i)
 					this->_begin[i] = this->_begin[i + 1];
@@ -323,14 +319,11 @@ namespace ft
 			size_type position = first.base() - this->_begin;
 			size_type r_len = last - first;
 			size_type new_size = this->size() - r_len;
-			size_type diff = new_size - position;
 			if (!r_len)
 			{
 				this->clear();
 				return first;
 			}
-			if (ft::is_integral<value_type>::value)
-				std::memmove(first.base(), first.base() + r_len, diff * sizeof(value_type));
 			else
 			{
 				for (size_type i = position; i < new_size; ++i)

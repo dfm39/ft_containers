@@ -700,7 +700,7 @@ int	main()
 		vec31.push_back(tmp1 <= tmp2);
 		vec31.push_back(tmp1 > tmp2);
 		vec31.push_back(tmp1 >= tmp2);
-		tmp2.erase(tmp1.end() - 2);
+		tmp2.erase(tmp2.end() - 2);
 		vec31.push_back(tmp1 == tmp2);
 		vec31.push_back(tmp1 != tmp2);
 		vec31.push_back(tmp1 < tmp2);
