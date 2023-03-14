@@ -21,14 +21,14 @@ STDFLAG		=	-D STL=1
 FT			=	ft_
 STD			=	std_
 
-# UNCOMMENT FOR LEAKS CHECK WITH LEAKS ON MAC AND VALGRIND ON LINUX
-OS = $(shell uname)
-ifeq ($(OS), Darwin)
- 	LEAKS +=  leaks --atExit -- 
-endif
-ifeq ($(OS), Linux)
- 	LEAKS +=  valgrind 
-endif
+# UNCOMMENT FOR LEAKS CHECK WITH LEAKS ON MAC AND VALGRIND ON LINUX (SLOW)
+# OS = $(shell uname)
+# ifeq ($(OS), Darwin)
+#  	LEAKS +=  leaks --atExit -- 
+# endif
+# ifeq ($(OS), Linux)
+#  	LEAKS +=  valgrind
+# endif
 
 #------Colors--------
 BLACK	=	"\033[1;30m"
@@ -55,6 +55,7 @@ FT_VEC_TIME_RESULTS		=	$(VEC_RESULTS_DIR)ft_vec_time.txt
 STD_VEC_TIME_RESULTS	=	$(VEC_RESULTS_DIR)std_vec_time.txt
 FT_VEC_RESULTS			=	$(VEC_RESULTS_DIR)ft_vec_out.txt
 STD_VEC_RESULTS			=	$(VEC_RESULTS_DIR)std_vec_out.txt
+VEC_DIFF				=	$(VEC_RESULTS_DIR)diff.txt
 
 #------Paths---------
 VEC_SOURCES		=	$(addprefix $(SOURCES_DIR),$(addsuffix .cpp,$(VEC_FILE)))
@@ -74,7 +75,7 @@ FT_STCK_TIME_RESULTS	=	$(STCK_RESULTS_DIR)ft_stack_time.txt
 STD_STCK_TIME_RESULTS	=	$(STCK_RESULTS_DIR)std_stack_time.txt
 FT_STCK_RESULTS			=	$(STCK_RESULTS_DIR)ft_stack_out.txt
 STD_STCK_RESULTS		=	$(STCK_RESULTS_DIR)std_stack_out.txt
-STD_STCK_DIFF			=	$(STCK_RESULTS_DIR)diff.txt
+STCK_DIFF				=	$(STCK_RESULTS_DIR)diff.txt
 
 #------Paths---------
 STCK_SOURCES		=	$(addprefix $(SOURCES_DIR),$(addsuffix .cpp,$(STCK_FILE)))
@@ -94,6 +95,7 @@ FT_MAP_TIME_RESULTS		=	$(MAP_RESULTS_DIR)ft_map_time.txt
 STD_MAP_TIME_RESULTS	=	$(MAP_RESULTS_DIR)std_map_time.txt
 FT_MAP_RESULTS			=	$(MAP_RESULTS_DIR)ft_map_out.txt
 STD_MAP_RESULTS			=	$(MAP_RESULTS_DIR)std_map_out.txt
+MAP_DIFF				=	$(MAP_RESULTS_DIR)diff.txt
 
 #------Paths---------
 MAP_SOURCES		=	$(addprefix $(SOURCES_DIR),$(addsuffix .cpp,$(MAP_FILE)))
@@ -113,6 +115,7 @@ FT_SET_TIME_RESULTS		=	$(SET_RESULTS_DIR)ft_set_time.txt
 STD_SET_TIME_RESULTS	=	$(SET_RESULTS_DIR)std_set_time.txt
 FT_SET_RESULTS			=	$(SET_RESULTS_DIR)ft_set_out.txt
 STD_SET_RESULTS			=	$(SET_RESULTS_DIR)std_set_out.txt
+SET_DIFF				=	$(SET_RESULTS_DIR)diff.txt
 
 #------Paths---------
 SET_SOURCES		=	$(addprefix $(SOURCES_DIR),$(addsuffix .cpp,$(SET_FILE)))
@@ -197,11 +200,12 @@ vector:
 	@make std_vector
 
 	@echo $(CYAN) "PERFORMANCE COMPARISON VIA DIFF:" $(EOC)
-	@$(DIFF) $(FT_VEC_TIME_RESULTS) $(STD_VEC_TIME_RESULTS);	\
-																\
-	echo $(CYAN) "OUTPUT COMPARISON VIA DIFF:" $(EOC);			\
-	$(DIFF) $(FT_VEC_RESULTS) $(STD_VEC_RESULTS) &&				\
-	echo $(BGREEN) "NO DIFFERENCE IN STD AND FT FOUND" $(EOC)
+	@$(DIFF) $(FT_VEC_TIME_RESULTS) $(STD_VEC_TIME_RESULTS);		\
+																	\
+	echo $(CYAN) "OUTPUT COMPARISON VIA DIFF:" $(EOC);				\
+	$(DIFF) $(FT_VEC_RESULTS) $(STD_VEC_RESULTS) > $(VEC_DIFF) &&	\
+	echo $(BGREEN) "NO DIFFERENCE IN STD AND FT FOUND" $(EOC) &&	\
+	rm -f $(VEC_DIFF)
 
 
 
@@ -226,11 +230,12 @@ stack:
 	@make std_stack
 
 	@echo $(CYAN) "PERFORMANCE COMPARISON VIA DIFF:" $(EOC)
-	@$(DIFF) $(FT_STCK_TIME_RESULTS) $(STD_STCK_TIME_RESULTS);	\
-																\
-	echo $(CYAN) "OUTPUT COMPARISON VIA DIFF:" $(EOC);			\
-	$(DIFF) $(FT_STCK_RESULTS) $(STD_STCK_RESULTS) &&			\
-	echo $(BGREEN) "NO DIFFERENCE IN STD AND FT FOUND" $(EOC)
+	@$(DIFF) $(FT_STCK_TIME_RESULTS) $(STD_STCK_TIME_RESULTS);			\
+																		\
+	echo $(CYAN) "OUTPUT COMPARISON VIA DIFF:" $(EOC);					\
+	$(DIFF) $(FT_STCK_RESULTS) $(STD_STCK_RESULTS) > $(STCK_DIFF) &&	\
+	echo $(BGREEN) "NO DIFFERENCE IN STD AND FT FOUND" $(EOC) &&		\
+	rm -f $(STCK_DIFF)
 
 #				 #
 #--- MAP TEST ---#
@@ -253,11 +258,12 @@ map:
 	@make std_map
 
 	@echo $(CYAN) "PERFORMANCE COMPARISON VIA DIFF:" $(EOC)
-	@$(DIFF) $(FT_MAP_TIME_RESULTS) $(STD_MAP_TIME_RESULTS);	\
-																\
-	echo $(CYAN) "OUTPUT COMPARISON VIA DIFF:" $(EOC);			\
-	$(DIFF) $(FT_MAP_RESULTS) $(STD_MAP_RESULTS) &&				\
-	echo $(BGREEN) "NO DIFFERENCE IN STD AND FT FOUND" $(EOC)
+	@$(DIFF) $(FT_MAP_TIME_RESULTS) $(STD_MAP_TIME_RESULTS);		\
+																	\
+	echo $(CYAN) "OUTPUT COMPARISON VIA DIFF:" $(EOC);				\
+	$(DIFF) $(FT_MAP_RESULTS) $(STD_MAP_RESULTS) > $(MAP_DIFF) &&	\
+	echo $(BGREEN) "NO DIFFERENCE IN STD AND FT FOUND" $(EOC) &&	\
+	rm -f $(MAP_DIFF)
 
 #				 #
 #--- SET TEST ---#
@@ -280,11 +286,12 @@ set:
 	@make std_set
 
 	@echo $(CYAN) "PERFORMANCE COMPARISON VIA DIFF:" $(EOC)
-	@$(DIFF) $(FT_SET_TIME_RESULTS) $(STD_SET_TIME_RESULTS);	\
-																\
-	echo $(CYAN) "OUTPUT COMPARISON VIA DIFF:" $(EOC);			\
-	$(DIFF) $(FT_SET_RESULTS) $(STD_SET_RESULTS) &&				\
-	echo $(BGREEN) "NO DIFFERENCE IN STD AND FT FOUND" $(EOC)
+	@$(DIFF) $(FT_SET_TIME_RESULTS) $(STD_SET_TIME_RESULTS);		\
+																	\
+	echo $(CYAN) "OUTPUT COMPARISON VIA DIFF:" $(EOC);				\
+	$(DIFF) $(FT_SET_RESULTS) $(STD_SET_RESULTS) > $(SET_DIFF) &&	\
+	echo $(BGREEN) "NO DIFFERENCE IN STD AND FT FOUND" $(EOC) &&	\
+	rm -f $(SET_DIFF)
 
 ft_subject: $(FT_SUB_OBJECTS)
 	@echo $(CYAN) "COMPILING PROGRAM '$@'" $(EOC)
@@ -298,4 +305,4 @@ subject:
 	@echo $(PURPLE) "\n////// 42 TEST ///////\n" $(EOC)
 	@make ft_subject
 	@make std_subject
-	@echo $(PURPLE) "TO TEST, EXECUTE PROGRAMS WITH SEED AS ARG" $(EOC)
+	@echo $(PURPLE) "\nTO TEST, EXECUTE PROGRAMS WITH SEED AS ARG" $(EOC)
