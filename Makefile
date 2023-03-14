@@ -162,13 +162,15 @@ clean:
 	@rm -rf $(STD_OBJECTS_DIR)
 	@echo $(YELLOW) "OBJECT FILES CLEANED" $(EOC)
 
-fclean:	clean
+fclean: clean
 	@rm -f $(FT)*
 	@rm -f $(STD)*
 	@rm -rf $(RESULTS_DIR)
 	@echo $(RED)" TESTS & RESULTS DELETED" $(EOC)
 
-re:			fclean all
+re: fclean all
+
+.PHONY: all clean fclean re vector map stack set subject
 
 #				    #
 #--- VECTOR TEST ---#
@@ -294,5 +296,3 @@ subject:
 	@make ft_subject
 	@make std_subject
 	@echo $(PURPLE) "TO TEST, EXECUTE PROGRAMS WITH SEED AS ARG" $(EOC)
-
-.PHONY: all clean fclean re vector map stack set subject
