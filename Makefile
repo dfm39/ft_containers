@@ -21,11 +21,14 @@ STDFLAG		=	-D STL=1
 FT			=	ft_
 STD			=	std_
 
-# UNCOMMENT FOR LEAKS CHECK ON MAC
-# OS = $(shell uname)
-# ifeq ($(OS), Darwin)
-# 	LEAKS +=  leaks --atExit -- 
-# endif
+# UNCOMMENT FOR LEAKS CHECK WITH LEAKS ON MAC AND VALGRIND ON LINUX
+OS = $(shell uname)
+ifeq ($(OS), Darwin)
+ 	LEAKS +=  leaks --atExit -- 
+endif
+ifeq ($(OS), Linux)
+ 	LEAKS +=  valgrind 
+endif
 
 #------Colors--------
 BLACK	=	"\033[1;30m"
@@ -226,7 +229,7 @@ stack:
 	@$(DIFF) $(FT_STCK_TIME_RESULTS) $(STD_STCK_TIME_RESULTS);	\
 																\
 	echo $(CYAN) "OUTPUT COMPARISON VIA DIFF:" $(EOC);			\
-	$(DIFF) $(FT_STCK_RESULTS) $(STD_STCK_RESULTS) > &&			\
+	$(DIFF) $(FT_STCK_RESULTS) $(STD_STCK_RESULTS) &&			\
 	echo $(BGREEN) "NO DIFFERENCE IN STD AND FT FOUND" $(EOC)
 
 #				 #
