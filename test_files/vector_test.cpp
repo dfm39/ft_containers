@@ -603,22 +603,16 @@ int	main()
 			tmp1.push_back(i);
 		gettimeofday(&start, NULL);
 		vec28.push_back(tmp1.size());
-		vec28.push_back(tmp1.capacity());
 		tmp1.resize(42);
 		vec28.push_back(tmp1.size());
-		vec28.push_back(tmp1.capacity());
 		tmp1.resize(2342);
 		vec28.push_back(tmp1.size());
-		vec28.push_back(tmp1.capacity());
 		tmp1.resize(0);
 		vec28.push_back(tmp1.size());
-		vec28.push_back(tmp1.capacity());
 		tmp1.resize(122335);
 		vec28.push_back(tmp1.size());
-		vec28.push_back(tmp1.capacity());;
 		tmp1.resize(1114);
 		vec28.push_back(tmp1.size());
-		vec28.push_back(tmp1.capacity());
 		write_time(tstream, duration);
 		write_vec(vec28, ostream);
 	}

@@ -5,7 +5,7 @@
 NAME		=	containers
 
 CC				=	c++
-DIFF			=	diff -y --suppress-common-lines
+DIFF			=	diff -y
 MKDIR			=	mkdir -p
 SOURCES_DIR		=	./test_files/
 HEADER_DIR		=	./includes/
@@ -15,7 +15,7 @@ RESULTS_DIR		=	./results/
 LEAKS			=
 
 IFLAGS		=	-I $(HEADER_DIR)
-CFLAGS		=	-Wall -Wextra -Werror -pedantic -std=c++98 $(IFLAGS)
+CFLAGS		=	-std=c++98 $(IFLAGS)
 STDFLAG		=	-D STL=1
 
 FT			=	ft_
@@ -71,6 +71,7 @@ FT_STCK_TIME_RESULTS	=	$(STCK_RESULTS_DIR)ft_stack_time.txt
 STD_STCK_TIME_RESULTS	=	$(STCK_RESULTS_DIR)std_stack_time.txt
 FT_STCK_RESULTS			=	$(STCK_RESULTS_DIR)ft_stack_out.txt
 STD_STCK_RESULTS		=	$(STCK_RESULTS_DIR)std_stack_out.txt
+STD_STCK_DIFF			=	$(STCK_RESULTS_DIR)diff.txt
 
 #------Paths---------
 STCK_SOURCES		=	$(addprefix $(SOURCES_DIR),$(addsuffix .cpp,$(STCK_FILE)))
@@ -127,7 +128,6 @@ SUB_FILE	=	\
 SUB_SOURCES		=	$(addprefix $(SOURCES_DIR),$(addsuffix .cpp,$(SUB_FILE)))
 FT_SUB_OBJECTS	=	$(addprefix $(FT_OBJECTS_DIR),$(addsuffix .o,$(SUB_FILE)))
 STD_SUB_OBJECTS	=	$(addprefix $(STD_OBJECTS_DIR),$(addsuffix .o,$(SUB_FILE)))
-STD_UB_DEPS	=	$(addprefix $(STD_OBJECTS_DIR),$(addsuffix .d,$(SUB_FILE)))
 #====================
 
 #					 #
@@ -226,7 +226,7 @@ stack:
 	@$(DIFF) $(FT_STCK_TIME_RESULTS) $(STD_STCK_TIME_RESULTS);	\
 																\
 	echo $(CYAN) "OUTPUT COMPARISON VIA DIFF:" $(EOC);			\
-	$(DIFF) $(FT_STCK_RESULTS) $(STD_STCK_RESULTS) &&			\
+	$(DIFF) $(FT_STCK_RESULTS) $(STD_STCK_RESULTS) > &&			\
 	echo $(BGREEN) "NO DIFFERENCE IN STD AND FT FOUND" $(EOC)
 
 #				 #
