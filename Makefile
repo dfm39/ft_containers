@@ -108,20 +108,20 @@ STD_MAP_DEPS	=	$(addprefix $(STD_OBJECTS_DIR),$(addsuffix .d,$(MAP_FILE)))
 #					  #
 
 SET_FILE	=	\
-				SET_test
+				set_test
 
-SET_RESULTS_DIR			=	$(RESULTS_DIR)SET/
-FT_SET_TIME_RESULTS		=	$(SET_RESULTS_DIR)ft_SET_time.txt
-STD_SET_TIME_RESULTS	=	$(SET_RESULTS_DIR)std_SET_time.txt
-FT_SET_RESULTS			=	$(SET_RESULTS_DIR)ft_SET_out.txt
-STD_SET_RESULTS			=	$(SET_RESULTS_DIR)std_SET_out.txt
+SET_RESULTS_DIR			=	$(RESULTS_DIR)set/
+FT_SET_TIME_RESULTS		=	$(SET_RESULTS_DIR)ft_set_time.txt
+STD_SET_TIME_RESULTS	=	$(SET_RESULTS_DIR)std_set_time.txt
+FT_SET_RESULTS			=	$(SET_RESULTS_DIR)ft_set_out.txt
+STD_SET_RESULTS			=	$(SET_RESULTS_DIR)std_set_out.txt
 
 #------Paths---------
-MAP_SOURCES		=	$(addprefix $(SOURCES_DIR),$(addsuffix .cpp,$(MAP_FILE)))
-FT_MAP_OBJECTS	=	$(addprefix $(FT_OBJECTS_DIR),$(addsuffix .o,$(MAP_FILE)))
-FT_MAP_DEPS		=	$(addprefix $(FT_OBJECTS_DIR),$(addsuffix .d,$(MAP_FILE)))
-STD_MAP_OBJECTS	=	$(addprefix $(STD_OBJECTS_DIR),$(addsuffix .o,$(MAP_FILE)))
-STD_MAP_DEPS	=	$(addprefix $(STD_OBJECTS_DIR),$(addsuffix .d,$(MAP_FILE)))
+SET_SOURCES		=	$(addprefix $(SOURCES_DIR),$(addsuffix .cpp,$(SET_FILE)))
+FT_SET_OBJECTS	=	$(addprefix $(FT_OBJECTS_DIR),$(addsuffix .o,$(SET_FILE)))
+FT_SET_DEPS		=	$(addprefix $(FT_OBJECTS_DIR),$(addsuffix .d,$(SET_FILE)))
+STD_SET_OBJECTS	=	$(addprefix $(STD_OBJECTS_DIR),$(addsuffix .o,$(SET_FILE)))
+STD_SET_DEPS	=	$(addprefix $(STD_OBJECTS_DIR),$(addsuffix .d,$(SET_FILE)))
 #====================
 
 #						  #
@@ -169,13 +169,13 @@ all:
 clean:
 	@rm -rf $(FT_OBJECTS_DIR)
 	@rm -rf $(STD_OBJECTS_DIR)
-	@echo $(YELLOW) " -> OBJECT FILES CLEANED" $(EOC)
+	@echo $(YELLOW) "OBJECT FILES CLEANED" $(EOC)
 
 fclean:	clean
 	@rm -f $(FT)*
 	@rm -f $(STD)*
 	@rm -rf $(RESULTS_DIR)
-	@echo $(RED)"  -> TESTS & RESULTS DELETED" $(EOC)
+	@echo $(RED)" TESTS & RESULTS DELETED" $(EOC)
 
 re:			fclean all
 
@@ -194,7 +194,7 @@ vector:
 	@$(MKDIR) $(RESULTS_DIR)
 	@$(MKDIR) $(VEC_RESULTS_DIR)
 
-	@echo $(PURPLE) "////// VECTOR ///////\n " $(EOC)
+	@echo $(PURPLE) "\n////// VECTOR ///////\n " $(EOC)
 	@echo $(YELLOW) "**** RUNNING TESTS, PLEASE WAIT ****\n " $(EOC)
 
 	@make ft_vector
@@ -221,7 +221,7 @@ stack:
 	@$(MKDIR) $(RESULTS_DIR)
 	@$(MKDIR) $(STCK_RESULTS_DIR)
 
-	@echo $(PURPLE) "////// STACK ///////\n " $(EOC)
+	@echo $(PURPLE) "\n////// STACK ///////\n " $(EOC)
 	@echo $(YELLOW) "**** RUNNING TESTS, PLEASE WAIT ****\n " $(EOC)
 
 	@make ft_stack
@@ -248,7 +248,7 @@ map:
 	@$(MKDIR) $(RESULTS_DIR)
 	@$(MKDIR) $(MAP_RESULTS_DIR)
 	
-	@echo $(PURPLE) "////// MAP ///////\n " $(EOC)
+	@echo $(PURPLE) "\n////// MAP ///////\n " $(EOC)
 	@echo $(YELLOW) "**** RUNNING TESTS, PLEASE WAIT ****\n " $(EOC)
 
 	@make ft_map
@@ -275,7 +275,7 @@ set:
 	@$(MKDIR) $(RESULTS_DIR)
 	@$(MKDIR) $(SET_RESULTS_DIR)
 	
-	@echo $(PURPLE) "////// SET ///////\n " $(EOC)
+	@echo $(PURPLE) "\n////// SET ///////\n " $(EOC)
 	@echo $(YELLOW) "**** RUNNING TESTS, PLEASE WAIT ****\n " $(EOC)
 
 	@make ft_set
@@ -297,11 +297,11 @@ std_subject: $(STD_SUB_OBJECTS)
 	@$(CC) $(CFLAGS) $(STDFLAG)  $(SUB_SOURCES) -o $@
 
 subject:
-	@echo $(PURPLE) "////// 42 TEST ///////" $(EOC)
+	@echo $(PURPLE) "\n////// 42 TEST ///////\n" $(EOC)
 	@make ft_subject
 	@make std_subject
 	@echo $(PURPLE) "TO TEST, EXECUTE PROGRAMS WITH SEED AS ARG" $(EOC)
 
-.PHONY:		all clean fclean re vector map stack set subject
+.PHONY: all clean fclean re vector map stack set subject
 
 -include $(DEPS)

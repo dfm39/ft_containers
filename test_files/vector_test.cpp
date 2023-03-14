@@ -32,9 +32,7 @@ void	write_vec(vector_t vec, std::fstream &ostream)
 
 	ostream << "CONTENT =";
 	for (vector_t::iterator it = vec.begin(); it != vec.end(); it++)
-	{
 		ostream << " " << *it;
-	}
 	ostream << "\n\n";
 }
 

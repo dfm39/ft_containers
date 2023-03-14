@@ -39,14 +39,10 @@ void	write_map(map_t map, std::fstream &ostream)
 
 	ostream << "KEYS =";
 	for (map_t::iterator it = map.begin(); it != map.end(); it++)
-	{
 		ostream << " " << it->first;
-	}
 	ostream << "\nCONTENT =";
 	for (map_t::iterator it = map.begin(); it != map.end(); it++)
-	{
 		ostream << " " << it->second;
-	}
 	ostream << "\n\n";
 }
 
@@ -145,79 +141,6 @@ int	main()
 		write_map(map5, ostream);
 		write_map(map6, ostream);
 	}
-	/*______________________________*/
-	/*--- AT & [] OVERLOAD TESTS ---*/
-	/*------------------------------*/
-	{
-		write_fname("AT & [] OVERLOAD", tstream, ostream);
-		/* PERFORMANCE TEST */
-		map_ii map7;
-		map_is map8;
-
-		for (size_t i = 0; i < 20000; i++)
-		{
-			map7[i] = i + 1;
-			map8[i] = "TEST";
-		}
-		for (size_t i = 0; i < 20000; i++)
-		{
-			map7.at(i);
-			map8.at(i);
-			map7[i];
-			map8[i];
-		}
-		duration = time_ms(start);
-		write_time(tstream, duration);
-	}
-	{
-		/* FUNCTIONAL TEST */
-
-		map_ii map7;
-		map_is map8;
-
-		ret_vec_int ret_int;
-		ret_vec_str ret_str;
-
-		for (size_t i = 12; i < 24; i++)
-		{
-			map7[i] = i * 3;
-			map8[i] = "TEST";
-		}
-		map7[0] = 42;
-		map8[8] = "HELLO";
-		map8[9] = "WATSON";
-
-		ret_int.push_back(map7[0]);
-		ret_int.push_back(map7[14]);
-		ret_int.push_back(map7[18]);
-		ret_int.push_back(map7[22]);
-		ret_str.push_back(map8[8]);
-		ret_str.push_back(map8[9]);
-		ret_str.push_back(map8[19]);
-		ret_str.push_back(map8[23]);
-
-		ret_int.push_back(map7.at(0));
-		ret_int.push_back(map7.at(12));
-		ret_int.push_back(map7.at(16));
-		ret_int.push_back(map7.at(20));
-		ret_str.push_back(map8.at(8));
-		ret_str.push_back(map8.at(9));
-		ret_str.push_back(map8.at(13));
-		ret_str.push_back(map8.at(20));
-		try
-		{
-			ret_int.push_back(map7.at(5));
-		}
-		catch (const std::out_of_range & e)
-		{
-			ostream << "\nEXCEPTION: OUT OF RANGE" << "\n\n";
-		}
-
-		write_map(map7, ostream);
-		write_std_vec(ret_int, ostream);
-		write_map(map8, ostream);
-		write_std_vec(ret_str, ostream);
-	}
 	/*_______________________*/
 	/*--- ITERATOR TESTS ---*/
 	/*-----------------------*/
@@ -225,7 +148,7 @@ int	main()
 		write_fname("ITERATORS", tstream, ostream);
 		/* PERFORMANCE & FUNCTIONAL TEST */
 
-		map_ii map9;
+		map_ii map7;
 		map_ii::iterator it;
 		map_ii::const_iterator cit;
 		map_ii::reverse_iterator rev;
@@ -234,50 +157,50 @@ int	main()
 		ret_vec_int	ret;
 
 		for (size_t i = 0; i < 7; i++)
-			map9.insert(make_pair(i, (i * 3 / 5)));
+			map7.insert(make_pair(i, (i * 3 / 5)));
 		gettimeofday(&start, NULL);
-		it = map9.begin();
-		cit = map9.begin();
-		rev = map9.rbegin();
-		crev = map9.rbegin();
+		it = map7.begin();
+		cit = map7.begin();
+		rev = map7.rbegin();
+		crev = map7.rbegin();
 		ret.push_back(it == cit);
-		for(; it != map9.end() && cit != map9.end(); it++, cit++)
+		for(; it != map7.end() && cit != map7.end(); it++, cit++)
 		{
 			ret.push_back(it->first);
 			ret.push_back(it->second);
 			ret.push_back(cit->first);
 			ret.push_back(cit->second);
 		}
-		ret.push_back(it == map9.end());
-		ret.push_back(cit == map9.end());
+		ret.push_back(it == map7.end());
+		ret.push_back(cit == map7.end());
 		it--, cit--;
-		ret.push_back(it == map9.end());
-		ret.push_back(cit == map9.end());
-		for(; it != map9.begin() && cit != map9.begin(); it--, cit--)
+		ret.push_back(it == map7.end());
+		ret.push_back(cit == map7.end());
+		for(; it != map7.begin() && cit != map7.begin(); it--, cit--)
 		{
 			ret.push_back(it->first);
 			ret.push_back(it->second);
 			ret.push_back(cit->first);
 			ret.push_back(cit->second);
 		}
-		ret.push_back(it == map9.end());
-		ret.push_back(cit == map9.end());
+		ret.push_back(it == map7.end());
+		ret.push_back(cit == map7.end());
 
 		/* REVERSE */
 		ret.push_back(rev == crev);
-		for(; rev != map9.rend() && crev != map9.rend(); rev++, crev++)
+		for(; rev != map7.rend() && crev != map7.rend(); rev++, crev++)
 		{
 			ret.push_back(rev->first);
 			ret.push_back(rev->second);
 			ret.push_back(crev->first);
 			ret.push_back(crev->second);
 		}
-		ret.push_back(rev == map9.rend());
-		ret.push_back(crev == map9.rend());
+		ret.push_back(rev == map7.rend());
+		ret.push_back(crev == map7.rend());
 		rev--, crev--;
-		ret.push_back(rev == map9.rend());
-		ret.push_back(crev == map9.rend());
-		for(; rev != map9.rbegin() && crev != map9.rbegin(); rev--, crev--)
+		ret.push_back(rev == map7.rend());
+		ret.push_back(crev == map7.rend());
+		for(; rev != map7.rbegin() && crev != map7.rbegin(); rev--, crev--)
 		{
 			ret.push_back(rev->first);
 			ret.push_back(rev->second);
@@ -287,8 +210,81 @@ int	main()
 
 		duration = time_ms(start);
 		write_time(tstream, duration);
-		write_map(map9, ostream);
+		write_map(map7, ostream);
 		write_std_vec(ret, ostream);
+	}
+	/*______________________________*/
+	/*--- AT & [] OVERLOAD TESTS ---*/
+	/*------------------------------*/
+	{
+		write_fname("AT & [] OVERLOAD", tstream, ostream);
+		/* PERFORMANCE TEST */
+		map_ii map8;
+		map_is map9;
+
+		for (size_t i = 0; i < 20000; i++)
+		{
+			map8[i] = i + 1;
+			map9[i] = "TEST";
+		}
+		for (size_t i = 0; i < 20000; i++)
+		{
+			map8.at(i);
+			map9.at(i);
+			map8[i];
+			map9[i];
+		}
+		duration = time_ms(start);
+		write_time(tstream, duration);
+	}
+	{
+		/* FUNCTIONAL TEST */
+
+		map_ii map8;
+		map_is map9;
+
+		ret_vec_int ret_int;
+		ret_vec_str ret_str;
+
+		for (size_t i = 12; i < 24; i++)
+		{
+			map8[i] = i * 3;
+			map9[i] = "TEST";
+		}
+		map8[0] = 42;
+		map9[8] = "HELLO";
+		map9[9] = "WATSON";
+
+		ret_int.push_back(map8[0]);
+		ret_int.push_back(map8[14]);
+		ret_int.push_back(map8[18]);
+		ret_int.push_back(map8[22]);
+		ret_str.push_back(map9[8]);
+		ret_str.push_back(map9[9]);
+		ret_str.push_back(map9[19]);
+		ret_str.push_back(map9[23]);
+
+		ret_int.push_back(map8.at(0));
+		ret_int.push_back(map8.at(12));
+		ret_int.push_back(map8.at(16));
+		ret_int.push_back(map8.at(20));
+		ret_str.push_back(map9.at(8));
+		ret_str.push_back(map9.at(9));
+		ret_str.push_back(map9.at(13));
+		ret_str.push_back(map9.at(20));
+		try
+		{
+			ret_int.push_back(map8.at(5));
+		}
+		catch (const std::out_of_range & e)
+		{
+			ostream << "\nEXCEPTION: OUT OF RANGE" << "\n\n";
+		}
+
+		write_map(map8, ostream);
+		write_std_vec(ret_int, ostream);
+		write_map(map9, ostream);
+		write_std_vec(ret_str, ostream);
 	}
 	/*__________________________*/
 	/*--- EMPTY & SIZE TESTS ---*/
@@ -527,6 +523,8 @@ int	main()
 		write_time(tstream, duration);
 	}
 	{
+		/* FUNCTIONAL TEST */
+
 		map_ii	map18;
 		map_is	map19;
 
