@@ -2,6 +2,8 @@
 # define STACK_H
 
 #include "vector.hpp"
+# include "ra_iterator.hpp"
+# include "utils.hpp"
 
 namespace ft
 {

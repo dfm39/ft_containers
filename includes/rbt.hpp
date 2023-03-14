@@ -2,8 +2,6 @@
 # define RBT_H
 
 # include <memory>
-# include <string>
-# include <iostream>
 # include "utils.hpp"
 
 # define BLACK true
@@ -562,10 +560,8 @@ namespace ft
 		/* one child and node has two children								*/
 		void	_delete_node(node_pointer &	node)
 		{
-			// print_i();
-			// std::cout << "_----------------------------------_" << std::endl;
+
 			node_pointer	helper = NULL;
-			// print_p();
 			/* CASE 1 - Node is leafnode 		*/
 			if (this->_is_leafnode(node))
 			{

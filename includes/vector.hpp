@@ -4,13 +4,7 @@
 # include <memory>
 # include <stdexcept>
 # include <utility>
-# include <algorithm>
-# include <cstring>
 
-
-# include <stdio.h>
-# include <string.h>
-# include <iostream>
 # include "ra_iterator.hpp"
 # include "utils.hpp"
 
