@@ -293,6 +293,10 @@ set:
 	echo $(BGREEN) "NO DIFFERENCE IN STD AND FT FOUND" $(EOC) &&	\
 	rm -f $(SET_DIFF)
 
+#					 #
+#--- SUBJECT TEST ---#
+#					 #
+
 ft_subject: $(FT_SUB_OBJECTS)
 	@echo $(CYAN) "COMPILING PROGRAM '$@'" $(EOC)
 	@$(CC) $(CFLAGS) $(SUB_SOURCES) -o $@
