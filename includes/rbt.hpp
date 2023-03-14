@@ -815,7 +815,7 @@ namespace ft
 			return node;
 		}
 
-		const node_pointer	_minimum(const node_pointer	node) const
+		node_pointer	_minimum(const node_pointer	node) const
 		{
 			while (!node->null_node && !node->left->null_node)
 				node = node->left;
@@ -830,7 +830,7 @@ namespace ft
 			return node;
 		}
 
-		const node_pointer	_maximum(const node_pointer	node) const
+		node_pointer	_maximum(const node_pointer	node) const
 		{
 			while (!node->null_node && !node->right->null_node)
 				node = node->right;

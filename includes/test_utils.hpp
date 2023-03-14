@@ -4,6 +4,8 @@
 # include <iostream>
 # include <sys/time.h>
 # include <fstream>
+# include <iomanip>
+# include <vector>
 
 #ifndef STL
 # define STL 0

@@ -5,7 +5,7 @@
 NAME		=	containers
 
 CC				=	c++
-DIFF			=	diff -y
+DIFF			=	diff -y --suppress-common-lines
 MKDIR			=	mkdir -p
 SOURCES_DIR		=	./test_files/
 HEADER_DIR		=	./includes/
