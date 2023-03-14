@@ -56,9 +56,7 @@ STD_VEC_RESULTS			=	$(VEC_RESULTS_DIR)std_vec_out.txt
 #------Paths---------
 VEC_SOURCES		=	$(addprefix $(SOURCES_DIR),$(addsuffix .cpp,$(VEC_FILE)))
 FT_VEC_OBJECTS	=	$(addprefix $(FT_OBJECTS_DIR),$(addsuffix .o,$(VEC_FILE)))
-FT_VEC_DEPS		=	$(addprefix $(FT_OBJECTS_DIR),$(addsuffix .d,$(VEC_FILE)))
 STD_VEC_OBJECTS	=	$(addprefix $(STD_OBJECTS_DIR),$(addsuffix .o,$(VEC_FILE)))
-STD_VEC_DEPS	=	$(addprefix $(STD_OBJECTS_DIR),$(addsuffix .d,$(VEC_FILE)))
 #====================
 
 #						#
@@ -77,9 +75,7 @@ STD_STCK_RESULTS		=	$(STCK_RESULTS_DIR)std_stack_out.txt
 #------Paths---------
 STCK_SOURCES		=	$(addprefix $(SOURCES_DIR),$(addsuffix .cpp,$(STCK_FILE)))
 FT_STCK_OBJECTS		=	$(addprefix $(FT_OBJECTS_DIR),$(addsuffix .o,$(STCK_FILE)))
-FT_STCK_DEPS		=	$(addprefix $(FT_OBJECTS_DIR),$(addsuffix .d,$(STCK_FILE)))
 STD_STCK_OBJECTS	=	$(addprefix $(STD_OBJECTS_DIR),$(addsuffix .o,$(STCK_FILE)))
-STD_STCK_DEPS		=	$(addprefix $(STD_OBJECTS_DIR),$(addsuffix .d,$(STCK_FILE)))
 #====================
 
 #					  #
@@ -98,9 +94,7 @@ STD_MAP_RESULTS			=	$(MAP_RESULTS_DIR)std_map_out.txt
 #------Paths---------
 MAP_SOURCES		=	$(addprefix $(SOURCES_DIR),$(addsuffix .cpp,$(MAP_FILE)))
 FT_MAP_OBJECTS	=	$(addprefix $(FT_OBJECTS_DIR),$(addsuffix .o,$(MAP_FILE)))
-FT_MAP_DEPS		=	$(addprefix $(FT_OBJECTS_DIR),$(addsuffix .d,$(MAP_FILE)))
 STD_MAP_OBJECTS	=	$(addprefix $(STD_OBJECTS_DIR),$(addsuffix .o,$(MAP_FILE)))
-STD_MAP_DEPS	=	$(addprefix $(STD_OBJECTS_DIR),$(addsuffix .d,$(MAP_FILE)))
 #====================
 
 #					  #
@@ -119,9 +113,7 @@ STD_SET_RESULTS			=	$(SET_RESULTS_DIR)std_set_out.txt
 #------Paths---------
 SET_SOURCES		=	$(addprefix $(SOURCES_DIR),$(addsuffix .cpp,$(SET_FILE)))
 FT_SET_OBJECTS	=	$(addprefix $(FT_OBJECTS_DIR),$(addsuffix .o,$(SET_FILE)))
-FT_SET_DEPS		=	$(addprefix $(FT_OBJECTS_DIR),$(addsuffix .d,$(SET_FILE)))
 STD_SET_OBJECTS	=	$(addprefix $(STD_OBJECTS_DIR),$(addsuffix .o,$(SET_FILE)))
-STD_SET_DEPS	=	$(addprefix $(STD_OBJECTS_DIR),$(addsuffix .d,$(SET_FILE)))
 #====================
 
 #						  #
@@ -134,9 +126,8 @@ SUB_FILE	=	\
 #------Paths---------
 SUB_SOURCES		=	$(addprefix $(SOURCES_DIR),$(addsuffix .cpp,$(SUB_FILE)))
 FT_SUB_OBJECTS	=	$(addprefix $(FT_OBJECTS_DIR),$(addsuffix .o,$(SUB_FILE)))
-FT_SUB_DEPS		=	$(addprefix $(FT_OBJECTS_DIR),$(addsuffix .d,$(SUB_FILE)))
 STD_SUB_OBJECTS	=	$(addprefix $(STD_OBJECTS_DIR),$(addsuffix .o,$(SUB_FILE)))
-STD_SUB_DEPS	=	$(addprefix $(STD_OBJECTS_DIR),$(addsuffix .d,$(SUB_FILE)))
+STD_UB_DEPS	=	$(addprefix $(STD_OBJECTS_DIR),$(addsuffix .d,$(SUB_FILE)))
 #====================
 
 #					 #
@@ -153,11 +144,11 @@ $(NAME):
 
 $(FT_OBJECTS_DIR)%.o : $(SOURCES_DIR)%.cpp
 	@$(MKDIR) $(FT_OBJECTS_DIR)
-	@$(CC) $(CFLAGS) -MMD -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(STD_OBJECTS_DIR)%.o : $(SOURCES_DIR)%.cpp
 	@$(MKDIR) $(STD_OBJECTS_DIR)
-	@$(CC) $(CFLAGS) $(STDFLAG) -MMD -c $< -o $@
+	@$(CC) $(CFLAGS) $(STDFLAG) -c $< -o $@
 
 all:
 	@make vector
@@ -206,6 +197,8 @@ vector:
 	echo $(CYAN) "OUTPUT COMPARISON VIA DIFF:" $(EOC);			\
 	$(DIFF) $(FT_VEC_RESULTS) $(STD_VEC_RESULTS) &&				\
 	echo $(BGREEN) "NO DIFFERENCE IN STD AND FT FOUND" $(EOC)
+
+
 
 #				   #
 #--- STACK TEST ---#
@@ -303,5 +296,3 @@ subject:
 	@echo $(PURPLE) "TO TEST, EXECUTE PROGRAMS WITH SEED AS ARG" $(EOC)
 
 .PHONY: all clean fclean re vector map stack set subject
-
--include $(DEPS)
