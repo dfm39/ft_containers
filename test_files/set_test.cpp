@@ -75,7 +75,6 @@ int	main()
 
 		for (size_t i = 0; i < 12; i++)
 			tmp1.insert(i * 3);
-		gettimeofday(&start, NULL);
 		set_int set0(tmp1.begin(), tmp1.end());
 		set_int set1(set0);
 		set_int set2;
