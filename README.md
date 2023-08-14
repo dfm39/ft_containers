@@ -66,6 +66,6 @@ In this project, our main objective is to implement fundamental container types 
 - Additional files are permitted for code organization.
 - Exercise creativity, and remember that you cannot use STL containers to implement your own.
 
-## By dmf39 alias dfranke
+### By dmf39 (alias dfranke)
 
 Feel free to connect with me if you have any questions or suggestions!
