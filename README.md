@@ -11,7 +11,7 @@ Welcome to the ft_containers project! In this project, we dive into the world of
 - [Formatting and Naming Conventions](#formatting-and-naming-conventions)
 - [Allowed/Forbidden](#allowedforbidden)
 - [Design Requirements](#design-requirements)
-- [Restrictions](#restrictions)
+- [Additions](#additions)
 
 ## Get Started
 
@@ -60,7 +60,7 @@ In this project, our main objective is to implement fundamental container types 
 - Function implementations in header files (except for templates) will result in a grade of 0.
 - Headers should be self-contained, avoiding double inclusion with proper include guards.
 
-### Restrictions
+### Additions
 
 - You can organize your project files as needed while submitting mandatory files.
 - Additional files are permitted for code organization.
