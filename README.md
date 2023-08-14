@@ -1,6 +1,6 @@
 # ft_containers
 
-Welcome to the ft_containers project! In this project, we dive into the world of C++98 and reimagine essential container types inspired by the C++ Standard Template Library (STL). The goal is to implement various container types, adhering to the C++98 standard, while ensuring clean, readable, and well-structured code.
+Welcome to school 42's ft_containers project! In this project, we dive into the world of C++98 and reimagine essential container types inspired by the C++ Standard Template Library (STL). The goal is to implement various container types, adhering to the C++98 standard, while ensuring clean, readable, and well-structured code.
 
 ## Table of Contents
 - [Get Started](#get-started)
