@@ -15,7 +15,7 @@ RESULTS_DIR		=	./results/
 LEAKS			=
 
 IFLAGS		=	-I $(HEADER_DIR)
-CFLAGS		=	-std=c++98 $(IFLAGS)
+CFLAGS		=	-std=c++98 $(IFLAGS) -Werror -Wextra -Wall
 STDFLAG		=	-D STL=1
 
 FT			=	ft_
