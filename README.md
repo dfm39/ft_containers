@@ -3,14 +3,15 @@
 Welcome to the ft_containers project! In this project, we dive into the world of C++98 and reimagine essential container types inspired by the C++ Standard Template Library (STL). The goal is to implement various container types, adhering to the C++98 standard, while ensuring clean, readable, and well-structured code.
 
 ## Table of Contents
-- [Get Started](#getstarted)
+- [Get Started](#get-started)
+- [Subject](#subject)
 - [Chapter I Objectives](#chapter-i-objectives)
 - [Chapter II General Rules](#chapter-ii-general-rules)
 - [Compilation](#compilation)
 - [Formatting and Naming Conventions](#formatting-and-naming-conventions)
 - [Allowed/Forbidden](#allowedforbidden)
 - [Design Requirements](#design-requirements)
-- [Restrictions](#read-me)
+- [Restrictions](#restrictions)
 
 ## Get Started
 
@@ -28,6 +29,8 @@ You can also use the following commands for more comprehensive tasks:
 - `make clean`: Remove object files.
 - `make fclean`: Remove compiled programs and test results.
 - `make re`: Perform a clean rebuild of the project.
+
+# Subject
 
 ## Chapter I Objectives
 
